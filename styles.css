@@ -1,0 +1,335 @@
+@font-face {
+    font-family: "Inter";
+    src: url("./assets/fonts/Inter.woff2") format("woff2-variations");
+    font-weight: 400 800;
+}
+
+:root {
+    --gap: 30px;
+
+    --Yellow: hsl(35, 77%, 62%);
+    --Light-vermillion: hsl(5, 85%, 63%);
+    --Almost-white: hsl(36, 100%, 99%);
+    --Silver: hsl(233, 8%, 79%);
+    --Gunmetal: hsl(236, 13%, 42%);
+    --Dark-space-blue: hsl(240, 100%, 5%);
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+header, main {
+    width: 92%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+main {
+    display: grid;
+    gap: 64px;
+}
+
+@media (min-width: 80rem) {
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    header,main {
+        max-width: 1110px;
+    }
+    main {
+        gap: 71px var(--gap);
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: 
+            'first first second'
+            'first first second'
+            'third third third';
+    }
+    .first-main-grid-child {
+        grid-area: first;
+    }
+    .second-main-grid-child {
+        grid-area: second;
+    }
+    .third-main-grid-child {
+        grid-area: third;
+    }
+}
+
+/* ==========================================================
+For header, it's desktop-first workflow.
+============================================================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 89px 0 55px 0;
+}
+
+nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--Gunmetal);
+    font-size: 0.9375rem;
+}
+
+nav a:hover {
+    color: var(--Light-vermillion);
+    cursor: pointer;
+}
+
+.header-label {
+    display: none;
+}
+
+@media (max-width: 46rem) {
+    body:has(input[type=checkbox]:checked) {
+        overflow: hidden;
+    }
+    header {
+        padding: 32px 0;
+    }
+    header img {
+        width: 45px;
+        height: auto;
+    }    
+    .header-label {
+        display: block;
+        position: relative;
+        right: 0;
+        z-index: 3;
+    }
+    .header-label input {
+        opacity: 0;
+        position: absolute;
+    } 
+    .header-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-image: url(./assets/images/icon-menu.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .header-label:has(input:focus-visible) {
+        outline: 1px solid blue;
+    }
+    .header-label:has(input:checked)::after {
+        background-image: url(./assets/images/icon-menu-close.svg);
+    } 
+    .header-label:has(input:checked) + nav {
+        opacity: 1;
+    } 
+    .header-label:has(input:checked) + nav ul {
+        display: flex;
+    }
+    nav {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: #00001a50;
+        opacity: 0;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 24px;
+        position: absolute;
+        width: 256px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        background-color: var(--Almost-white);
+        padding-top: 144px;
+        padding-left: 24px;
+        display: none;
+        animation: slide-out 0.3s ease-in-out;
+    }
+    nav a {
+        color: var(--Dark-space-blue);
+        font-size: 1.125rem;
+    }
+    @keyframes slide-out {
+        0% {
+            translate: 100%;
+        }
+        100% {
+            translate: 0;
+        }
+    }
+}
+
+/*============================================================*/
+
+.bg-img {
+    background-image: url(./assets/images/image-web-3-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+}
+
+.first-main-grid-child h1 {
+    font-size: 2.5rem;
+    color: var(--Dark-space-blue);
+    margin-top: 24px;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 0.9375rem;
+    line-height: 1.625rem;
+}
+
+.first-main-grid-child p {
+    color: var(--Gunmetal);
+}
+
+.first-main-grid-child button {
+    background-color: var(--Light-vermillion);
+    color: var(--Dark-space-blue);
+    border: none;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.274rem;
+    padding: 12px 33px;
+    margin-top: 24px;
+}
+
+.first-main-grid-child button:hover {
+    cursor: pointer;
+    background-color: var(--Dark-space-blue);
+    color: var(--Almost-white);
+}
+
+@media (min-width: 80rem) {
+    .bg-img {
+        background-image: url(./assets/images/image-web-3-desktop.jpg);
+        grid-column: 1 / -1;
+    }
+    .first-main-grid-child h1 {
+        font-size: 3.5rem;
+        margin: 0;
+    }
+    .first-main-grid-child button {
+        margin-top: 29px;
+    }
+    .text-and-btn {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--gap);
+        padding-top: 28px;
+    }
+}
+
+.second-main-grid-child {
+    padding: 24px 20px;
+    background-color: var(--Dark-space-blue);
+}
+
+.second-main-grid-child h2 {
+    color: var(--Yellow);
+    font-size: 2rem;
+    margin-bottom: 35px;
+}
+
+.second-main-grid-child h3 {
+    color: var(--Almost-white);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.second-main-grid-child h3:hover {
+    cursor: pointer;
+    color: var(--Yellow);
+    transition: color 0.2s;
+}
+
+.second-main-grid-child p {
+    color: var(--Silver);
+}
+
+.second-main-grid-child hr {
+    border: none;
+    border-top: 1px solid var(--Gunmetal);
+    margin: 30px 0;
+}
+
+@media (min-width: 80rem) {
+    .second-main-grid-child {
+        padding: 32px 24px;
+    }
+    .second-main-grid-child h2 {
+        font-size: 2.5rem;
+    }
+}
+
+.third-main-grid-child {
+    display: grid;
+    gap: 32px;
+}
+
+.third-main-grid-child > div {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.third-main-grid-child img {
+    width: 100px;
+    height: 127px;
+}
+
+.number {
+    color: var(--Light-vermillion);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.text-container h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--Dark-space-blue);
+    margin-top: 0.75rem;
+    margin-bottom: 0.5625rem;
+}
+
+.text-container h4:hover {
+    cursor: pointer;
+    color: var(--Light-vermillion);
+    transition: color 0.2s;
+}
+
+.text-container p {
+    color: var(--Gunmetal);
+}
+
+@media (min-width: 80rem) {
+    .third-main-grid-child {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+    }
+}
+
+footer {
+    margin-top: 50px;
+}
